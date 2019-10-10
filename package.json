@@ -1,0 +1,49 @@
+{
+  "name": "terr",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.5.0",
+    "@material-ui/icons": "^4.4.3",
+    "@material-ui/lab": "^4.0.0-alpha.28",
+    "@material-ui/styles": "^4.5.0",
+    "@material-ui/system": "^4.5.0",
+    "@material-ui/types": "^4.1.1",
+    "@material-ui/utils": "^4.4.0",
+    "@types/jest": "24.0.18",
+    "@types/keycloak-js": "^3.4.1",
+    "@types/node": "12.7.12",
+    "@types/react": "16.9.5",
+    "@types/react-dom": "latest",
+    "@types/react-router-dom": "^5.1.0",
+    "keycloak-js": "6.0.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "latest",
+    "styled-components": "latest",
+    "typescript": "latest"
+  },
+  "scripts": {
+    "start": "BROWSER=none react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
