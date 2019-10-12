@@ -12,11 +12,11 @@ class UserInfo extends Component {
       familyName: "",
       givenName: "",
       username: "",
-      MyNewAttrributeKey: ""
+      MyNewAttrributeKey: "",
+      role: [],
     };
     this.props.keycloak.loadUserInfo().then(userInfo => {
-        console.log(userInfo);
-        this.setState({name: userInfo.name, email: userInfo.email, id: userInfo.sub, MyNewAttrributeKey: userInfo.MyNewAttrributeKey, username: userInfo.preferred_username, familyName: userInfo.family_name, givenName: userInfo.given_name})
+        this.setState({name: userInfo.name, email: userInfo.email, role: userInfo.Role, id: userInfo.sub, MyNewAttrributeKey: userInfo.MyNewAttrributeKey, username: userInfo.preferred_username, familyName: userInfo.family_name, givenName: userInfo.given_name});
     });
   }
 
@@ -29,6 +29,7 @@ class UserInfo extends Component {
         <p>Last: {this.state.familyName}</p>
         <p>Email: {this.state.email}</p>
         <p>ID: {this.state.id}</p>
+        <p>Role: {this.state.role}</p>
         <p>MyNewAttrributeKey: {this.state.MyNewAttrributeKey}</p>
       </div>
     );

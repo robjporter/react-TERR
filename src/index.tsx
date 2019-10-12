@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './app/serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import PersistApp from "./components/PersistApp";
+
+//ReactDOM.render(<KeycloakProvider keycloak={keycloak}><ThemeProvider theme={theme}><CssBaseline /><App /></ThemeProvider></KeycloakProvider>, document.getElementById('root'));
+
+//ReactDOM.render(<ThemeProvider theme={theme}><CssBaseline /><App /></ThemeProvider>, document.getElementById('root'));
+
+ReactDOM.render(<PersistApp />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -19,6 +19,7 @@
     "keycloak-js": "6.0.1",
     "react": "latest",
     "react-dom": "latest",
+    "react-keycloak": "^6.1.2",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "latest",

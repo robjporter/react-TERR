@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 class Logout extends Component {
 
@@ -10,9 +11,9 @@ class Logout extends Component {
 
   render() {
     return (
-      <button onClick={ () => this.logout() }>
+      <Button variant="outlined" color="primary" onClick={ () => this.logout() }>
         Logout
-      </button>
+      </Button>
     );
   }
 }
