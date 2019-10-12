@@ -5,13 +5,15 @@ import ErrorButton from "../components/Buttons/ErrorButton";
 import SuccessButton from "../components/Buttons/SuccessButton";
 
 function Secured4() {
-    const { keycloak, initialized } = useKeycloak();
+    const { keycloak } = useKeycloak();
     let Username = "";
     let Admin = "false";
+    let EditProfile = false;
 
     if(keycloak) {
         if(keycloak.idTokenParsed) {
             Username = keycloak.idTokenParsed.name;
+            EditProfile = true;
             if(keycloak.idTokenParsed.Role.includes("Admin")) {
                 Admin = "true";
             }
@@ -38,6 +40,13 @@ function Secured4() {
             Username: {Username}
             <br />
             IsAdmin: {Admin}
+            <br />
+            <br />
+            {EditProfile && (
+                <Button type="button" variant="contained" color="primary" onClick={() => keycloak.accountManagement()}>
+                    Edit Profile
+                </Button>
+            )}
         </div>
     );
 }

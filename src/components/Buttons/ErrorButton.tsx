@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    withStyles,
-    Theme,
-} from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { red } from '@material-ui/core/colors';
 import theme from "../../theme/theme";
