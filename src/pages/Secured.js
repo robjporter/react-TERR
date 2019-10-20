@@ -4,6 +4,9 @@ import Button from "@material-ui/core/Button";
 import ErrorButton from "../components/Buttons/ErrorButton";
 import SuccessButton from "../components/Buttons/SuccessButton";
 
+//import KeyCloakInfo from "../components/PersistApp/KeyCloakInfo";
+//const kc = new KeyCloakInfo();
+
 function Secured4() {
     const { keycloak } = useKeycloak();
     let Username = "";

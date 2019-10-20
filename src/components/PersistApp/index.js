@@ -8,7 +8,11 @@ import theme from "../../theme/theme";
 
 import App from '../../app/App';
 
-const keycloak = new Keycloak("./keycloak.json");
+import { LOCAL } from "../../constants";
+
+let keycloak = null;
+
+if(LOCAL) { keycloak = new Keycloak("./keycloak-local.json"); } else { keycloak = new Keycloak("./keycloak-remote.json"); }
 
 const keycloakProviderInitConfig = {
     onLoad: 'check-sso',
