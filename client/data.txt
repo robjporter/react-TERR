@@ -1,0 +1,13 @@
+CREATE TABLE `sofa`.`status` (`id` int AUTO_INCREMENT,`status_name` varchar(255), PRIMARY KEY (id), UNIQUE KEY `status_name` (`status_name`));
+
+CREATE TABLE `sofa`.`salesmotion` (`id` int AUTO_INCREMENT,`salesmotion_name` varchar(255), PRIMARY KEY (id), UNIQUE KEY `salesmotion_name` (`salesmotion_name`));
+
+CREATE TABLE `sofa`.`pss` (`id` int AUTO_INCREMENT,`pss_name` varchar(255), PRIMARY KEY (id), UNIQUE KEY `pss_name` (`pss_name`));
+
+CREATE TABLE `sofa`.`rsm` (`id` int AUTO_INCREMENT,`rsm_name` varchar(255), PRIMARY KEY (id), UNIQUE KEY `rsm_name` (`rsm_name`));
+
+CREATE TABLE `sofa`.`am` (`id` int AUTO_INCREMENT, `am_name` varchar(255), `rsm_id` int, `pss_id` int,PRIMARY KEY (id), FOREIGN KEY (rsm_id) REFERENCES rsm(id), FOREIGN KEY (pss_id) REFERENCES pss(id));
+
+CREATE TABLE `sofa`.`account` (`id` int AUTO_INCREMENT,`sector_name` varchar(255),`region_name` varchar(255),`account_name` text, `am_id` int, PRIMARY KEY (id), FOREIGN KEY (am_id) REFERENCES am(id));
+
+CREATE TABLE `sofa`.`accountmotion` (`id` int AUTO_INCREMENT,`account_id` int,`salesmotion_id` int,`status_id` int, PRIMARY KEY (id), FOREIGN KEY (account_id) REFERENCES account(id), FOREIGN KEY (salesmotion_id) REFERENCES salesmotion(id), FOREIGN KEY (status_id) REFERENCES status(id));
