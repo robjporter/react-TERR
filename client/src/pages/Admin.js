@@ -4,11 +4,11 @@ import { Redirect } from "react-router-dom";
 import AdminLoggedInComponent from "../components/AdminLoggedIn";
 import { useKeycloak } from '../components/PersistApp/lib';
 
-function Welcome() {
+function Admin() {
     const { keycloak } = useKeycloak();
 
-    if(!keycloak.authenticated) {
-        console.log("REDIRECTING TO HOME")
+    if(!keycloak.authenticated || !keycloak.idTokenParsed.Role.includes("Admin")) {
+        console.log("REDIRECTING TO HOME");
         return(<Redirect to="/" />);
     }
     return (
@@ -20,4 +20,4 @@ function Welcome() {
     );
 }
 
-export default Welcome;
+export default Admin;

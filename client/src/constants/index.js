@@ -1,3 +1,4 @@
+export const DEBUG = true;
 export const LOCAL = true;
 export const CSV_DATACOLUMN_COUNT = 5;
 

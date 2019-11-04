@@ -80,7 +80,6 @@ class DropzoneDialogExample extends React.Component {
         });
         this.setState({buttonText: "Processing Data"});
 
-        console.log("ONSAVE: ", files);
         Papa.parse(files[0], {
             header: true,
             camelCase: function(str) { 
@@ -137,7 +136,9 @@ class DropzoneDialogExample extends React.Component {
                 let categories = [];
                 // GET All Category names
                 for(let i = CSV_DATACOLUMN_COUNT; i < results.length-1; i++) {
-                    categories.push(escape(results[i]));
+                    if(results[i] !== "undefined") {
+                        categories.push(escape(results[i]));
+                    }
                 }
                 return categories;
             },
@@ -184,19 +185,27 @@ class DropzoneDialogExample extends React.Component {
                     };
                     accounts.push(data);
 
+                    if(i === 0 || i === 1 || i === 2 || i === 16) {
+                        console.log(results.data[i]);
+                    }
+
                     // Account Motions
                     for(let j = 0; j < categories.length; j++) {
-                        var field = "";
-                        if(results.data[i][categories[j]] === "" || results.data[i][categories[j]] === "undefined") {
+                        var field = results.data[i][unescape(categories[j])];
+                        if(field === "") {
                             field = "u";
-                        } else {
-                            field = results.data[i][categories[j]];
+                        } else if(field === "undefined") {
+                            field = "u";
+                        } else if(field === undefined) {
+                            field = "u";
                         }
 
-                        var data = {
+                        console.log("FIELD: ",field);
+
+                        let data = {
                             accountid: accounts.length,
                             salesmotionid: j+1,
-                            statusid: actions.indexOf(escape(field).toLowerCase())+1
+                            statusid: actions.indexOf(escape(field.toLowerCase()).toLowerCase())+1
                         };
                         accountMotion.push(data);
                     }
@@ -216,6 +225,12 @@ class DropzoneDialogExample extends React.Component {
                 var rsm = Array.from(new Set(tamrsmpssactions[1]));
                 var pss = Array.from(new Set(tamrsmpssactions[2]));
                 var actions = Array.from(new Set(tamrsmpssactions[3]));
+
+                // Remove Undefined
+                var index = actions.indexOf("undefined");
+                if (index > -1) {
+                    actions.splice(index, 1);
+                }
 
                 // GET all Accounts and their associated Actions/Status
                 var accountmotion = this.getAccountMotion(results, categories, am, actions);
@@ -452,17 +467,12 @@ function HorizontalLinearStepper() {
 
 // DIALOG
 function SimpleDialog(props) {
-    const classes = useStyles();
     const { onClose, selectedValue, open } = props;
   
     const handleClose = () => {
       onClose(selectedValue);
     };
-  
-    const handleListItemClick = (value) => {
-      onClose(value);
-    };
-  
+
     return (
     <Dialog onClose={handleClose} maxWidth="md" aria-labelledby="max-width-dialog-title" open={open}>
         <DialogTitle id="max-width-dialog-title">Set backup account</DialogTitle>

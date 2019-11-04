@@ -1,4 +1,4 @@
-CREATE TABLE `sofa`.`status` (`id` int AUTO_INCREMENT,`status_name` varchar(255), PRIMARY KEY (id), UNIQUE KEY `status_name` (`status_name`));
+CREATE TABLE `sofa`.`status` (`id` int AUTO_INCREMENT,`status_name` varchar(255), `status_score` int NOT NULL DEFAULT 0, PRIMARY KEY (id), UNIQUE KEY `status_name` (`status_name`));
 
 CREATE TABLE `sofa`.`salesmotion` (`id` int AUTO_INCREMENT,`salesmotion_name` varchar(255), PRIMARY KEY (id), UNIQUE KEY `salesmotion_name` (`salesmotion_name`));
 

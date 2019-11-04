@@ -23,6 +23,9 @@ function Welcome() {
       if(keycloak.idTokenParsed.Role.includes("Admin")) {
         console.log("REDIRECTING TO ADMIM");
         return(<Redirect to="/admin" />);
+      } else if(keycloak.idTokenParsed.Role.includes("RSM")) {
+        console.log("REDIRECTING TO RSM");
+        return(<Redirect to="/rsm" />);
       } else {
         console.log("REDIRECTING TO USER");
         return(<Redirect to="/user" />);

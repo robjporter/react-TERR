@@ -4,8 +4,10 @@ import Welcome from '../pages/Welcome';
 import Secured from '../pages/Secured';
 import User from '../pages/User';
 import Admin from '../pages/Admin';
+import RSM from '../pages/RSM';
 import Dispatch from './Dispatch';
 import { useKeycloak } from '../components/PersistApp/lib';
+import { LogIt } from "./Functions";
 
 import Bar from "../components/Bar";
 
@@ -21,7 +23,6 @@ function App() {
 
   if(keycloak) {
     if(keycloak.idTokenParsed) {
-      console.log(keycloak.idTokenParsed);
       user.firstName = keycloak.idTokenParsed.given_name;
       user.lastName = keycloak.idTokenParsed.family_name;
       user.username = keycloak.idTokenParsed.preferred_username;
@@ -31,10 +32,12 @@ function App() {
 
   function onSignOutClick() {
     keycloak.logout();
+    LogIt("SignOut", user.username);
   }
 
   function onSignInClick() {
     keycloak.login();
+    LogIt("SignIn", user.username);
   }
 
   function onSettingsClick() {
@@ -58,6 +61,7 @@ function App() {
           <Route path="/dispatch" component={Dispatch} />
           <Route path="/user" component={User} />
           <Route path="/admin" component={Admin} />
+          <Route path="/rsm" component={RSM} />
           <Route path="/salesmotions" component={Secured} />
           <Route path="/statuses" component={Secured} />
           <Route path="/reports" component={Secured} />

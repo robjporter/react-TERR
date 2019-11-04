@@ -20,21 +20,21 @@ async function getInfo(sql) {
     });
 }
 
-/* GET home page. */
-router.get('/:surname/:firstname', async function(req, res, next) {
-    var am = [];
-    var sname = req.params.surname;
-    var fname = req.params.firstname;
-    var name = escape(sname + ", " + fname);
-
+router.post('/:aid/:smid/:sid', async function(req, res, next) {
+    console.log("ACCOUNT ID: ", req.params.aid);
+    console.log("SALESMOTION ID: ", req.params.smid);
+    console.log("STATUS ID: ", req.params.sid);
     let tmp = [];
 
-    tmp = await getInfo("SELECT am.id, am.am_name, account.id, account.account_name, account.sector_name, account.region_name from pss JOIN am on pss.id=am.pss_id JOIN account on am.id=account.am_id WHERE pss.pss_name='" + name + "' ORDER BY account.account_name;").then(results => {
-        return results;
-    });
+    try {
+        tmp = await getInfo("UPDATE `sofa`.`accountmotion` SET `status_id` = '" + req.params.sid + "' WHERE `salesmotion_id` = '" + req.params.smid + "' AND `account_id` = " + req.params.aid + ";").then(results => {
+            return results;
+        });
+    }  catch(e) {
+        console.log(e);
+    }
 
     console.log("RECORDS: ", tmp.length);
-
     res.json(tmp);
 });
 

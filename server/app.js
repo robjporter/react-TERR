@@ -4,22 +4,31 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const initStats = require('@zenmate/stats');
 
 // ROUTERS
 var indexRouter = require('./routes/index');
+var categoriesRouter = require('./routes/categories');
 var usersRouter = require('./routes/users');
 var fakeRouter = require('./routes/fake');
 var queriesRouter = require('./routes/queries');
 var pssRouter = require('./routes/pss');
+var accountRouter = require('./routes/accounts');
+var salesmotionRouter = require('./routes/salesmotions');
 
 // MYSQL
 const mysql      = require('mysql');
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
   host     : 'localhost',
-  user     : 'keycloak',
-  password : 'K3ycl0ak',
-  database : 'keycloak'
+  user     : 'sofa',
+  password : 'S0fa1234',
+  database : 'sofa'
 });
+
+const { statsMiddleware, getStats } = initStats({ endpointStats: true });
+
+// MYSQL KEEP ALLIVE
+setInterval(function () {connection.query('SELECT 1');console.log("MYSQL KEEPALIVE");}, 5000);
 
 // EXPRESS APP
 var app = express();
@@ -35,6 +44,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
+app.use(statsMiddleware);
 
 // CORS
 app.use(function(req, res, next) {
@@ -62,11 +72,16 @@ app.use('/users', usersRouter);
 app.use('/fake', fakeRouter);
 app.use('/queries', queriesRouter);
 app.use('/pss', pssRouter);
+app.use('/accounts', accountRouter);
+app.use('/categories/', categoriesRouter);
+app.use('/salesmotion', salesmotionRouter);
 
 app.post('/create', (req, res) => {
     let linkString = req.body.link;
     res.send(linkString);
 })
+
+app.get('/stats', (req,res) => res.send(getStats()));
 
 // ERROR HANDLER
 app.use(function(req, res, next) {

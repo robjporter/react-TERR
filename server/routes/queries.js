@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require("mysql");
 
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
     host     : 'localhost',
     user     : 'sofa',
     password : 'S0fa1234',

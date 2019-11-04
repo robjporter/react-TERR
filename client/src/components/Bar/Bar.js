@@ -137,7 +137,7 @@ class Bar extends Component {
               </IconButton>
 
               <StyledMenu anchorEl={menu.anchorEl}  open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
-                <MenuItem disabled={performingAction} style={{color:"gray"}}>{this.props.userData.firstName}{" "}{this.props.userData.lastName}</MenuItem>
+                <MenuItem disabled={performingAction} style={{color:"gray"}}>{userData.firstName}{" "}{userData.lastName}</MenuItem>
                 <MenuItem disabled={performingAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
                 <MenuItem disabled={performingAction} onClick={this.handleSignOutClick}>Sign out</MenuItem>
               </StyledMenu>
